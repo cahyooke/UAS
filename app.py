@@ -6,14 +6,19 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
+import os
 
-# --- Load data preprocessed ---
 @st.cache_data
 def load_data():
-    df = pd.read_csv("dataset_cancer_pca.csv")
-    return df
+    path = "dataset_cancer_pca.csv"
+    if not os.path.exists(path):
+        st.error(f"File '{path}' tidak ditemukan. Pastikan sudah di-upload ke GitHub.")
+        return None
+    return pd.read_csv(path)
 
 df = load_data()
+if df is None:
+    st.stop()
 
 # Pisahkan fitur dan target
 X = df.drop(columns="Class")
