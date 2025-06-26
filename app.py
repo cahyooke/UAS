@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 # --- Load data preprocessed ---
 @st.cache_data
 def load_data():
-    df = pd.read_csv("dataset_cancer_preprocessed.csv")
+    df = pd.read_csv("dataset_cancer_pca.csv")
     return df
 
 df = load_data()
